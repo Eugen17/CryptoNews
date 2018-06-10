@@ -1,9 +1,11 @@
 import requests
 import soup as soup
 from bs4 import BeautifulSoup
-from config import BOT_TOKEN, HEADERS, BASE_URL
+from config import BOT_TOKEN, HEADERS, BASE_URL_BINANCE
+import telebot
+CHAT = '389904727'
 
-
+bot = telebot.TeleBot(BOT_TOKEN)
 def get_html_soup(html):
     r = requests.get(html, headers=HEADERS)
     data_fromhtml = r.content
@@ -22,9 +24,9 @@ def get_text_binance_article(html):
 		if (paragraph.text == "Details:"):
 			break
 		else:
-			list_important_paragraphs.append(paragraph.text)
+			list_important_paragraphs.append("\n"+paragraph.text+"\n")
 	text.append({
-		'header': news_header.text,
+		'header': "*" + news_header.text.strip() + "*",
 		'filling': list_important_paragraphs
 		})
 	return text[0]
@@ -41,12 +43,26 @@ def get_first_5_references():
 
 def get_article_url(tag):
     reference = tag.get('href')
-    info_source = BASE_URL + reference
+    info_source = BASE_URL_BINANCE + reference
     return info_source
 
+
+def get_first_5news():
+	list_news = []
+	list_urls = get_first_5_references();
+	for item in list_urls:
+		list_news.append(get_text_binance_article(item))
+	return list_news	
+
+
 def main():
-	print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'])
-	print(get_first_5_references())
+	print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'][1])
+	print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'][2])
+	bot.send_message(chat_id = CHAT,
+                     text = (get_first_5news())[0]['header'] + get_first_5news()[0]['filling'][0]+get_first_5news()[0]['filling'][1],
+                     parse_mode = 'markdown'
+                     )
+	print(get_first_5news())
 
 
 if __name__ == '__main__':
