@@ -1,10 +1,10 @@
 import requests
 import soup as soup
 from bs4 import BeautifulSoup
-from config import BOT_TOKEN, HEADERS, BASE_URL_BINANCE
+from config import BOT_TOKEN, HEADERS, BASE_URL_BINANCE, CHAT
 from post import *
 import telebot
-CHAT = '389904727'
+
 
 bot = telebot.TeleBot(BOT_TOKEN)
 
@@ -43,24 +43,24 @@ def get_filling_article(list):
 
 
 
-def get_first_5_references():
+def get_first_5_references_binance():
 	references = []
 	soup = get_html_soup("https://support.binance.com/hc/en-us/sections/115000106672-New-Listings")
 	list_items = soup.find_all("a", {"class": "article-list-link"})
 	for item in list_items[0:5]:
-		references.append(get_article_url(item))
+		references.append(get_article_url_binance(item))
 	return references
 
 
-def get_article_url(tag):
+def get_article_url_binance(tag):
     reference = tag.get('href')
     info_source = BASE_URL_BINANCE + reference
     return info_source
 
 
-def get_first_5news():
+def get_first_5news_binance():
 	list_news = []
-	list_urls = get_first_5_references();
+	list_urls = get_first_5_references_binance();
 	for item in list_urls:
 		list_news.append(get_text_binance_article(item))
 	return list_news	
@@ -74,17 +74,17 @@ def is_exist_byfilling(filling1):
     		return False	
 
 
-def check_save_send_binance (list):
+def check_save_send_bitrumb (list_news):
 	bot = telebot.TeleBot(BOT_TOKEN)
-	for item in list:
-		if (is_exist_byfilling(item['filling'])):
+	for item in list_news:
+		if (is_exist_byfilling(item['headers'])):
 			break
 		else:
 			hui = Post(header = item['header'], filling = item['filling'], url = item['url'])
 			print(hui.filling)
 			bot.send_message(CHAT, hui.header+hui.filling+ hui.url,parse_mode='markdown')
 			#почему этв хуйня не работает в посте
-			#hui.save()
+			hui.save()
 				
 
 
@@ -97,10 +97,10 @@ def main():
 	#Post(header = 	x["header"], filling = x["filling"], url=x["url"]).save()
 	#print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'])
 	bot.send_message(chat_id = CHAT,
-                     text = (get_first_5news()[0]['filling']),
+                     text = (get_first_5news_binance()[0]['filling']),
                      parse_mode = 'markdown'
                      )
-	check_save_send_binance(get_first_5news())
+	check_save_send_binance(get_first_5news_binance())
 	bot.send_message(chat_id=CHAT,text='zaebalo', parse_mode='markdown')
 	#print(get_first_5news())
 
