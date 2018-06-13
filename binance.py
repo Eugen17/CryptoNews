@@ -2,10 +2,13 @@ import requests
 import soup as soup
 from bs4 import BeautifulSoup
 from config import BOT_TOKEN, HEADERS, BASE_URL_BINANCE
+from post import *
 import telebot
 CHAT = '389904727'
 
 bot = telebot.TeleBot(BOT_TOKEN)
+
+
 def get_html_soup(html):
     r = requests.get(html, headers=HEADERS)
     data_fromhtml = r.content
@@ -14,7 +17,7 @@ def get_html_soup(html):
 
 
 def get_text_binance_article(html):
-	soup = get_html_soup(html)
+	soup = get_html_soup(html)	
 	text = []
 	news_header = soup.find("h1", {"class": "article-title"})
 	news_filling = soup.find("div", {"class": "article-body"})
@@ -27,9 +30,17 @@ def get_text_binance_article(html):
 			list_important_paragraphs.append("\n"+paragraph.text+"\n")
 	text.append({
 		'header': "*" + news_header.text.strip() + "*",
-		'filling': list_important_paragraphs
+		'filling': get_filling_article(list_important_paragraphs),
+		'url':html
 		})
 	return text[0]
+
+def get_filling_article(list):
+	maintext=''
+	for item in list:
+		maintext+=item
+	return maintext	
+
 
 
 def get_first_5_references():
@@ -55,14 +66,43 @@ def get_first_5news():
 	return list_news	
 
 
+def is_exist_byfilling(filling1):
+    	try:
+    		post = Post.objects.get(filling = filling1)
+    		return True
+    	except:
+    		return False	
+
+
+def check_save_send_binance (list):
+	bot = telebot.TeleBot(BOT_TOKEN)
+	for item in list:
+		if (is_exist_byfilling(item['filling'])):
+			break
+		else:
+			hui = Post(header = item['header'], filling = item['filling'], url = item['url'])
+			print(hui.filling)
+			bot.send_message(CHAT, hui.header+hui.filling+ hui.url,parse_mode='markdown')
+			#почему этв хуйня не работает в посте
+			#hui.save()
+				
+
+
+
+
+
+
 def main():
-	print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'][1])
-	print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'][2])
+	#x =get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")
+	#Post(header = 	x["header"], filling = x["filling"], url=x["url"]).save()
+	#print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'])
 	bot.send_message(chat_id = CHAT,
-                     text = (get_first_5news())[0]['header'] + get_first_5news()[0]['filling'][0]+get_first_5news()[0]['filling'][1],
+                     text = (get_first_5news()[0]['filling']),
                      parse_mode = 'markdown'
                      )
-	print(get_first_5news())
+	check_save_send_binance(get_first_5news())
+	bot.send_message(chat_id=CHAT,text='zaebalo', parse_mode='markdown')
+	#print(get_first_5news())
 
 
 if __name__ == '__main__':
