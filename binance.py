@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from config import HEADERS, BASE_URL_BINANCE, CHAT
 from post import Post
 from bot import bot
-from logger_settings import logger
 
 
 def get_html_soup(html):
