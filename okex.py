@@ -82,7 +82,7 @@ def check_save_send_okex (list_news):
 
 	for item in list_news:
 		hui = Post(header = item['header'], filling = item['filling'], url = item['url'])
-		bot.send_message(CHAT, hui.header+hui.filling+ hui.url,parse_mode='markdown')
+		bot.send_message("-1001303379218", hui.header+hui.filling+ hui.url,parse_mode='markdown')
 		#почему этв хуйня не работает в посте
 		hui.save()
 
