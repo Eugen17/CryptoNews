@@ -7,23 +7,34 @@ import time
 
 def bitrumb_post():
 	while (True):
-		time.sleep(1)
-		check_save_send_bitrumb(get_first_5news_bitrumb())
-		print ("rabotaem1")
+		try:
+			time.sleep(1)
+			check_save_send_bitrumb(get_first_5news_bitrumb())
+			print ("rabotaem1")
+		except:
+			pass	
 
 
 def okex_post():
 	while (True):
-		time.sleep(1)
-		check_save_send_okex(get_first_news_okex())
-		print ("rabotaem2")
+		try:
+			time.sleep(1)
+			check_save_send_okex(get_first_news_okex())
+			print ("rabotaem2")
+		except:
+			pass	
 
 
 def binance_post():
 	while (True):
-		time.sleep(1)
-		check_save_send_binance(get_first_5news_binance())
-		print ("rabotaem3")
+		try:
+			time.sleep(1)
+			check_save_send_binance(get_first_5news_binance())
+			print ("rabotaem3")
+		except :
+			pass
+		
+		
 
 
 
