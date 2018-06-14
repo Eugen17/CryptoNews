@@ -1,5 +1,4 @@
 PyTelegramBotApi
 requests
 bs4
-soup
 mongoengine

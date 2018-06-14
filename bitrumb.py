@@ -1,9 +1,6 @@
-import requests
-import soup as soup
-from bs4 import BeautifulSoup
-from config import BOT_TOKEN, HEADERS, BASE_URL_BITRUMB, CHAT
+from config import BOT_TOKEN, BASE_URL_BITRUMB
 from post import *
-from binance import get_html_soup,is_exist_byfilling
+from binance import get_html_soup
 import telebot
 
 
