@@ -70,7 +70,7 @@ def is_exist_byurl(url1):
     		return False	
 
 
-def check_save_send_binance (list_news):
+def check_save_send_bitrumb (list_news):
 	bot = telebot.TeleBot(BOT_TOKEN)
 
 	for item in list_news:
@@ -84,7 +84,7 @@ def check_save_send_binance (list_news):
 
 
 def main():
-	check_save_send_binance (get_first_5news_bitrumb())
+	check_save_send_bitrumb (get_first_5news_bitrumb())
 
 
 if __name__ == '__main__':

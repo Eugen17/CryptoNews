@@ -4,5 +4,7 @@ HEADERS = {
 BASE_URL_BINANCE = "https://support.binance.com"        
 CHAT = '389904727'
 BASE_URL_BITRUMB = "https://bithumb.cafe/%EC%95%94%ED%98%B8%ED%99%94%ED%8F%90-%EA%B2%80%ED%86%A0%EB%B3%B4%EA%B3%A0%EC%84%9C"
+BASE_URL_OKEX = "https://support.okex.com"
+BASE_URL_UPBIT = "https://upbit.com/service_center/notice"
 
 

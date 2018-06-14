@@ -68,16 +68,16 @@ def get_first_5news_binance():
 
 def is_exist_byfilling(filling1):
     	try:
-    		post = Post.objects.get(filling = filling1)
+    		post = Post.objects.get(header = filling1)
     		return True
     	except:
     		return False	
 
 
-def check_save_send_bitrumb (list_news):
+def check_save_send_binance (list_news):
 	bot = telebot.TeleBot(BOT_TOKEN)
 	for item in list_news:
-		if (is_exist_byfilling(item['headers'])):
+		if (is_exist_byfilling(item['header'])):
 			break
 		else:
 			hui = Post(header = item['header'], filling = item['filling'], url = item['url'])
@@ -85,13 +85,6 @@ def check_save_send_bitrumb (list_news):
 			bot.send_message(CHAT, hui.header+hui.filling+ hui.url,parse_mode='markdown')
 			#почему этв хуйня не работает в посте
 			hui.save()
-				
-
-
-
-
-
-
 def main():
 	#x =get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")
 	#Post(header = 	x["header"], filling = x["filling"], url=x["url"]).save()
