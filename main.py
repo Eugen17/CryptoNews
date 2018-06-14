@@ -8,7 +8,7 @@ import time
 def bitrumb_post():
 	while (True):
 		try:
-			time.sleep(1)
+			time.sleep(3)
 			check_save_send_bitrumb(get_first_5news_bitrumb())
 			print ("rabotaem1")
 		except:
@@ -18,7 +18,7 @@ def bitrumb_post():
 def okex_post():
 	while (True):
 		try:
-			time.sleep(1)
+			time.sleep(3)
 			check_save_send_okex(get_first_news_okex())
 			print ("rabotaem2")
 		except:
@@ -28,7 +28,7 @@ def okex_post():
 def binance_post():
 	while (True):
 		try:
-			time.sleep(1)
+			time.sleep(3)
 			check_save_send_binance(get_first_5news_binance())
 			print ("rabotaem3")
 		except :
