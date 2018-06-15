@@ -39,12 +39,15 @@ def get_filling_article(list_):
     return main_text
 
 
-def get_first_5_references_binance():
+def get_first_references_binance():
     references = []
     soup = get_html_soup("https://support.binance.com/hc/en-us/sections/115000106672-New-Listings")  # Я бы вынес линк
     list_items = soup.find_all("a", {"class": "article-list-link"})
     for item in list_items[0:5]:
-        references.append(get_article_url_binance(item))
+        if is_exist_byurl(get_article_url_binance(item)):
+            continue
+        else:
+            references.append(get_article_url_binance(item))
     return references
 
 
@@ -54,17 +57,17 @@ def get_article_url_binance(tag):
     return info_source
 
 
-def get_first_5news_binance():
+def get_first_news_binance():
     list_news = []
-    list_urls = get_first_5_references_binance()
+    list_urls = get_first_references_binance()
     for item in list_urls:
         list_news.append(get_text_binance_article(item))
     return list_news
 
 
-def is_exist_byfilling(filling):
+def is_exist_byurl(filling):
     try:  # Хуйня нагружает проц. Никто так не делает, нужен "иф"
-        Post.objects.get(header=filling)
+        Post.objects.get(url=filling)
         return True
     except:
         return False
@@ -72,30 +75,15 @@ def is_exist_byfilling(filling):
 
 def check_save_send_binance(list_news):
     for item in list_news:
-        if is_exist_byfilling(item['header']):
-            break
-        else:
-            hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
-            print(hui.filling)
-            bot.send_message("-1001303379218", hui.header + hui.filling + hui.url, parse_mode='markdown')
-            hui.save()
+        hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
+        bot.send_message("-1001303379218", hui.header + hui.filling + hui.url, parse_mode='markdown')
+        hui.save()
 
 
-def main():
-    #  x =get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")
-    #  Post(header = 	x["header"], filling = x["filling"], url=x["url"]).save()
-    #  print(get_text_binance_article("https://support.binance.com/hc/en-us/articles/360004692771-Binance-Supports-ONT-Mainnet-Swap-and-Adds-ONT-USDT-Trading-Pair-")['filling'])
-    bot.send_message(chat_id = CHAT,
-                     text = (get_first_5news_binance()[0]['filling']),
-                     parse_mode = 'markdown'
-                     )
-    check_save_send_binance(get_first_5news_binance())
-    bot.send_message(chat_id=CHAT,text='zaebalo', parse_mode='markdown')
+
     #  print(get_first_5news())
 
 
-if __name__ == '__main__':
-    main()
 
 
 
