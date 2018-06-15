@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c794e0b5-94a0-4223-887b-7afdb84cdae0" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/CryptoNews.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CryptoNews.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/binance.py" beforeDir="false" afterPath="$PROJECT_DIR$/binance.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitrumb.py" beforeDir="false" afterPath="$PROJECT_DIR$/bitrumb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/okex.py" beforeDir="false" afterPath="$PROJECT_DIR$/okex.py" afterDir="false" />
-    </list>
+    <list default="true" id="c794e0b5-94a0-4223-887b-7afdb84cdae0" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
