@@ -30,7 +30,6 @@ def get_okex_text_article(html):
     paragraphs = soup.find("div", {"class": "article-body"})
     list_important_paragraphs = []
     news_paragraphs = paragraphs.find_all('p')
-    print(news_paragraphs)
     for paragraph in news_paragraphs:
         if paragraph.text.find("You may find more information about the token(s) here") !=(-1):
             break
@@ -56,4 +55,4 @@ def check_save_send_okex(list_news):
     for item in list_news:
         hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
         bot.send_message("-1001303379218", hui.header + hui.filling + hui.url, parse_mode='markdown')
-        #hui.save()
+        hui.save()
