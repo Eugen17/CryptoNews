@@ -15,7 +15,11 @@ class Post(Document):
                      )
     
 
-
+class UpPost(Document):
+    header = StringField()
+    filling = StringField()
+    url = StringField()
+    urlup = StringField()
 
 
  

@@ -2,8 +2,7 @@ from config import BOT_TOKEN, BASE_URL_BITRUMB
 from post import *
 from binance import get_html_soup, is_exist_byurl
 import telebot
-
-bot = telebot.TeleBot(BOT_TOKEN)
+from bot import bot
 
 
 def get_first_references_bitrumb():

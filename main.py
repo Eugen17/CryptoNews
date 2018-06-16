@@ -1,6 +1,7 @@
 from binance import check_save_send_binance, get_first_news_binance
 from bitrumb import check_save_send_bitrumb, get_first_news_bitrumb
 from okex import check_save_send_okex, get_first_news_okex
+from upbit import check_save_send_upbit, get_first_news_upbit
 # from threading import Thread
 from logger_settings import logger
 import time
@@ -54,6 +55,8 @@ def main():
             check_save_send_okex(get_first_news_okex())
             time.sleep(1)
             check_save_send_binance(get_first_news_binance())
+            time.sleep(1)
+            check_save_send_upbit(get_first_news_upbit())
             time.sleep(1)
         except Exception:
             logger.exception('[E]')

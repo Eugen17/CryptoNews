@@ -2,8 +2,7 @@ from config import BOT_TOKEN, HEADERS, BASE_URL_OKEX, CHAT
 from post import *
 from binance import get_html_soup, is_exist_byurl, get_filling_article
 import telebot
-
-bot = telebot.TeleBot(BOT_TOKEN)
+from bot import bot
 
 
 def get_first_references_okex():
