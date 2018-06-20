@@ -1,4 +1,4 @@
-from config import BOT_TOKEN, BASE_URL_UPBIT
+from config import BOT_TOKEN, BASE_URL_UPBIT, CHAT
 from post import *
 from binance import get_html_soup, get_filling_article
 import telebot
@@ -63,9 +63,9 @@ def check_save_send_upbit(list_news):
     for item in list_news:
         hui = UpPost(header=item['header'], filling=item['filling'], url=item['url'], urlup=item["urlup"])
         hui.save()
-        bot.send_message("-1001303379218", hui.header, parse_mode="markdown")
-        bot.send_message("-1001303379218", hui.filling)
-        bot.send_message("-1001303379218", hui.urlup)
+        bot.send_message(CHAT, hui.header, parse_mode="markdown")
+        bot.send_message(CHAT, hui.filling)
+        bot.send_message(CHAT, hui.urlup)
 
 
 # почему этв хуйня не работает в посте
