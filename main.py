@@ -2,7 +2,7 @@ from binance import check_save_send_binance, get_first_news_binance
 from bitrumb import check_save_send_bitrumb, get_first_news_bitrumb
 from okex import check_save_send_okex, get_first_news_okex
 from upbit import check_save_send_upbit, get_first_news_upbit
-from binance_news2 import check_save_send_binance2, get_first_references_binance2
+from binance_news2 import check_save_send_binance2, get_first_references_binance2, get_first_news_binance2
 from logger_settings import logger
 import time
 
@@ -48,17 +48,16 @@ def main():
     # Thread(target=bitrumb_post).start()
     # Thread(target=okex_post).start()
     # Thread(target=binance_post).start()
+
+
+
     while True:
         try:
             check_save_send_bitrumb(get_first_news_bitrumb())
-            time.sleep(1)
             check_save_send_okex(get_first_news_okex())
-            time.sleep(1)
             check_save_send_binance(get_first_news_binance())
-            time.sleep(1)
-            check_save_send_upbit(get_first_news_upbit())
-            time.sleep(1)
-            check_save_send_binance2(get_first_references_binance2())
+            check_save_send_binance2(get_first_news_binance2())
+            
         except Exception:
             logger.exception('[E]')
 

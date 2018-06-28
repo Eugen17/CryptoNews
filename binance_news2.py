@@ -13,7 +13,7 @@ def get_text_binance_article(html):
     news_paragraphs = news_filling.find_all('p')
     list_important_paragraphs = []
     for paragraph in news_paragraphs[1:]:
-        if paragraph.text == "Thanks for your support!":
+        if paragraph.text == "Binance Team":
             break
         else:
             list_important_paragraphs.append("\n" + paragraph.text + "\n")
@@ -48,9 +48,6 @@ def get_first_news_binance2():
 def check_save_send_binance2(list_news):
     for item in list_news:
         hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
-        bot.send_message(CHAT, hui.header + hui.filling + hui.url, parse_mode='markdown')
+        bot.send_message('-1001303379218', hui.header, parse_mode='markdown')
+        bot.send_message('-1001303379218', hui.filling+hui.url)
         hui.save()
-
-
-if __name__ == '__main__':
-    check_save_send_binance2(get_first_news_binance2())
