@@ -48,6 +48,6 @@ def get_first_news_binance2():
 def check_save_send_binance2(list_news):
     for item in list_news:
         hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
-        bot.send_message(CHAT, hui.header, parse_mode='markdown')
-        bot.send_message(CHAT, hui.filling+hui.url)
+        #bot.send_message(CHAT, hui.header, parse_mode='markdown')
+        bot.send_message(CHAT, hui.url)
         hui.save()
