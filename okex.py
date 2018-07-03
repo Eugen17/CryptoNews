@@ -53,7 +53,7 @@ def get_first_news_okex():
 def check_save_send_okex(list_news):
     for item in list_news:
         hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
-        bot.send_message(CHAT, hui.header + hui.filling + hui.url, parse_mode='markdown')
+        bot.send_message(CHAT, hui.url, parse_mode='markdown')
         hui.save()
 
 
