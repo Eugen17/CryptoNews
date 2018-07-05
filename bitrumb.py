@@ -25,7 +25,7 @@ def get_article_url_bitrumb(item):
 
 def get_bitrumb_text_article(html):
     #soup = get_html_soup(html)
-    #text = []
+    text = []
     #news_header = soup.find("h3", {"class": "entry-title"})
     text.append({
         #'header': "*" + news_header.text.strip() + "*" + "\n",
