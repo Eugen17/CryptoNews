@@ -7,7 +7,7 @@ from bot import bot
 
 def get_text_binance_article(html):
     #soup = get_html_soup(html)
-    #text = []
+    text = []
     #news_header = soup.find("h1", {"class": "article-title"})
     #news_filling = soup.find("div", {"class": "article-body"})
     #news_paragraphs = news_filling.find_all('p')
