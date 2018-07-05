@@ -23,20 +23,20 @@ def get_article_url_okex(tag):
 
 
 def get_okex_text_article(html):
-    soup = get_html_soup(html)
-    text = []
-    news_header = soup.find("h1", {"class": "article-title"})
-    paragraphs = soup.find("div", {"class": "article-body"})
-    list_important_paragraphs = []
-    news_paragraphs = paragraphs.find_all('p')
-    for paragraph in news_paragraphs:
-        if paragraph.text.find("You may find more information about the token(s) here") !=(-1):
-            break
-        else:
-            list_important_paragraphs.append("\n" + paragraph.text)
+    #soup = get_html_soup(html)
+    #text = []
+    #news_header = soup.find("h1", {"class": "article-title"})
+    #paragraphs = soup.find("div", {"class": "article-body"})
+    #list_important_paragraphs = []
+    #news_paragraphs = paragraphs.find_all('p')
+    #for paragraph in news_paragraphs:
+    #    if paragraph.text.find("You may find more information about the token(s) here") !=(-1):
+    #        break
+    #    else:
+    #        list_important_paragraphs.append("\n" + paragraph.text)
     text.append({
-        'header': "*" + news_header.text.strip() + "*" + "\n",
-        'filling': get_filling_article(list_important_paragraphs) + "\n",
+        #'header': "*" + news_header.text.strip() + "*" + "\n",
+        #'filling': get_filling_article(list_important_paragraphs) + "\n",
         'url': html
     })
     return text[0]
@@ -52,7 +52,7 @@ def get_first_news_okex():
 
 def check_save_send_okex(list_news):
     for item in list_news:
-        hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
+        hui = Post(url=item['url'])
         bot.send_message(CHAT, hui.url, parse_mode='markdown')
         hui.save()
 
