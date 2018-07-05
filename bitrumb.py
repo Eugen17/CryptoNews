@@ -24,12 +24,12 @@ def get_article_url_bitrumb(item):
 
 
 def get_bitrumb_text_article(html):
-    soup = get_html_soup(html)
-    text = []
-    news_header = soup.find("h3", {"class": "entry-title"})
+    #soup = get_html_soup(html)
+    #text = []
+    #news_header = soup.find("h3", {"class": "entry-title"})
     text.append({
-        'header': "*" + news_header.text.strip() + "*" + "\n",
-        'filling': " ",
+        #'header': "*" + news_header.text.strip() + "*" + "\n",
+        #'filling': " ",
         'url': html
     })
     return text[0]
@@ -45,6 +45,6 @@ def get_first_news_bitrumb():
 
 def check_save_send_bitrumb(list_news):
     for item in list_news:
-        hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
+        hui = Post( url=item['url'])
         bot.send_message(CHAT,  hui.url, parse_mode='markdown')
         hui.save()
