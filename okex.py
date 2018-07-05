@@ -24,7 +24,7 @@ def get_article_url_okex(tag):
 
 def get_okex_text_article(html):
     #soup = get_html_soup(html)
-    #text = []
+    text = []
     #news_header = soup.find("h1", {"class": "article-title"})
     #paragraphs = soup.find("div", {"class": "article-body"})
     #list_important_paragraphs = []
