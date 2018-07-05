@@ -13,20 +13,20 @@ def get_html_soup(html):
 
 
 def get_text_binance_article(html):
-    soup = get_html_soup(html)
-    text = []
-    news_header = soup.find("h1", {"class": "article-title"})
-    news_filling = soup.find("div", {"class": "article-body"})
-    news_paragraphs = news_filling.find_all('p')
-    list_important_paragraphs = []
-    for paragraph in news_paragraphs[1:]:
-        if paragraph.text == "Details:":
-            break
-        else:
-            list_important_paragraphs.append("\n" + paragraph.text + "\n")
+    #soup = get_html_soup(html)
+    #text = []
+    #news_header = soup.find("h1", {"class": "article-title"})
+    #news_filling = soup.find("div", {"class": "article-body"})
+    #news_paragraphs = news_filling.find_all('p')
+    #list_important_paragraphs = []
+    #for paragraph in news_paragraphs[1:]:
+    #    if paragraph.text == "Details:":
+    #        break
+    #    else:
+    #        list_important_paragraphs.append("\n" + paragraph.text + "\n")
     text.append({
-        'header': "*" + news_header.text.strip() + "*",
-        'filling': get_filling_article(list_important_paragraphs),
+        #'header': "*" + news_header.text.strip() + "*",
+        #'filling': get_filling_article(list_important_paragraphs),
         'url': html
         })
     return text[0]
@@ -75,7 +75,7 @@ def is_exist_byurl(filling):
 
 def check_save_send_binance(list_news):
     for item in list_news:
-        hui = Post(header=item['header'], filling=item['filling'], url=item['url'])
+        hui = Post(url=item['url'])
         bot.send_message(CHAT, hui.url, parse_mode='markdown')
         hui.save()
 
